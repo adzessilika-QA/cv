@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лика Адзесси | Начинающий тестировщик QA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gradient: linear-gradient(135deg, #4f46e5, #7c3aed);
+            --gradient-light: linear-gradient(135deg, #6366f1, #8b5cf6);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 40px rgba(79, 70, 229, 0.1);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 50px;
+            max-width: 700px;
+        }
+
+        body.dark-mode .section-subtitle {
+            color: #94a3b8;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        body.dark-mode header {
+            background-color: rgba(15, 23, 42, 0.95);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        body.dark-mode .nav-links a {
+            color: #e2e8f0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 150px;
+            padding-bottom: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: var(--gradient);
+            border-radius: 50%;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        body.dark-mode .hero-subtitle {
+            color: #94a3b8;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .avatar {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-hover);
+            transition: var(--transition);
+        }
+
+        .avatar:hover {
+            transform: translateY(-10px);
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: -20px;
+            right: 50px;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            bottom: 50px;
+            right: -20px;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20px;
+            left: 30px;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 25px 15px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .stat-item {
+            background: #1e293b;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Education Section */
+        .education-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .education-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--gradient);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+            text-align: right;
+        }
+
+        .timeline-date {
+            flex: 1;
+            padding: 0 30px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .timeline-content {
+            flex: 2;
+            padding: 25px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        body.dark-mode .timeline-content {
+            background: #1e293b;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--gradient);
+            border-radius: 50%;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -40px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -40px;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 35px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .skill-category {
+            background: #1e293b;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-category h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .skill-name {
+            font-weight: 500;
+        }
+
+        .skill-level {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        body.dark-mode .skill-bar {
+            background: #334155;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 4px;
+        }
+
+        .soft-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .soft-skill-tag {
+            padding: 10px 20px;
+            background: rgba(79, 70, 229, 0.1);
+            border-radius: 50px;
+            font-weight: 500;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .soft-skill-tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Personal Qualities */
+        .qualities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .quality-card {
+            text-align: center;
+            padding: 40px 30px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .quality-card {
+            background: #1e293b;
+        }
+
+        .quality-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .quality-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .quality-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        body.dark-mode .contact-item {
+            background: #1e293b;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: var(--primary);
+            color: white;
+        }
+
+        .contact-item:hover .contact-icon {
+            background: white;
+            color: var(--primary);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(79, 70, 229, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .contact-text h3 {
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        body.dark-mode footer {
+            background: #0a0f1c;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-container,
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .education-timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+                text-align: left !important;
+            }
+
+            .timeline-date {
+                flex: 0 0 100px;
+                padding: 0;
+                text-align: center;
+            }
+
+            .timeline-content::before {
+                left: -40px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .floating-elements {
+                display: none;
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(79, 70, 229, 0.1) 0%, rgba(79, 70, 229, 0) 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-bug"></i>
+                Лика Адзесси
+            </a>
+            <nav>
+                <div class="nav-links">
+                    <a href="#home">Главная</a>
+                    <a href="#about">Обо мне</a>
+                    <a href="#education">Обучение</a>
+                    <a href="#skills">Навыки</a>
+                    <a href="#qualities">Качества</a>
+                    <a href="#contact">Контакты</a>
+                </div>
+            </nav>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Начинающий тестировщик QA</h1>
+                <div class="hero-subtitle">Ищу первую работу в IT</div>
+                <p class="hero-description">
+                    Привет! Меня зовут Лика. Я начинающий QA Engineer с сильной теоретической базой и огромным желанием развиваться в тестировании программного обеспечения. Прошла интенсивное обучение, освоила ключевые инструменты и методологии, и готова применять свои знания на практике.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Связаться со мной
+                    </a>
+                    <a href="#skills" class="btn btn-secondary">
+                        <i class="fas fa-code"></i> Мои навыки
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Лика Адзесси" class="avatar">
+                <div class="floating-elements">
+                    <div class="floating-element">
+                        <i class="fas fa-magnifying-glass"></i>
+                    </div>
+                    <div class="floating-element">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="floating-element">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Обо мне</h2>
+            <p class="section-subtitle">Мой путь в IT и почему я выбрала тестирование</p>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Моя история в IT началась с позиции <span class="highlight">Top Manager в IT-школах (2023-2025)</span>, где я приобрела бесценный опыт работы с клиентами, CRM-системами и аналитикой. Именно там я поняла, насколько важен качественный продукт для пользователя и какую роль играет тестирование в создании этого качества.
+                    </p>
+                    <p>
+                        Параллельно с работой я начала изучать <span class="highlight">тестирование ПО</span>, прошла несколько курсов и поняла, что это именно та сфера, где сочетаются технические знания, аналитическое мышление и внимание к деталям — всё то, что у меня хорошо получается.
+                    </p>
+                    <p>
+                        С <span class="highlight">декабря 2025 по февраль 2026</span> прошла интенсивное обучение тестированию ПО, где освоила ключевые инструменты и методологии. Сейчас я активно готовлюсь к своей первой работе в QA: изучаю инструменты, практикуюсь на тестовых проектах, совершенствую свои навыки. Ищу команду, где смогу приносить пользу и расти как специалист.
+                    </p>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-text">Готовность учиться</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-text">Внимание к деталям</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">∞</div>
+                            <div class="stat-text">Упорство</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Рабочее место" class="avatar">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" style="background: rgba(79, 70, 229, 0.03);">
+        <div class="container">
+            <h2 class="section-title">Чему я обучилась</h2>
+            <p class="section-subtitle">Интенсивный курс тестирования ПО (Декабрь 2025 - Февраль 2026)</p>
+            
+            <div class="education-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Дек 2025</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Основы веб-технологий</h3>
+                        <p>Клиент-серверная архитектура, HTTP запросы и ответы, кэш, куки. Авторизация и сессии. REST, JSON, XML, SOAP. Обзор протоколов. DevTools. Монолит и микросервисы. Что такое API.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Янв 2026</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Инструменты тестирования</h3>
+                        <p>Работа в Postman: тестирование API, переменные, автотесты и пре-реквесты. Сниффер Charles: Breakpoints и Map Local. TCP/IP и модель OSI.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Янв 2026</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Теория тестирования и документация</h3>
+                        <p>Виды требований, техники тест-дизайна, виды тестирования, пирамида и уровни тестирования. Тестовая документация: тест-план, чек-листы. Работа в TMS: IT Test и тест-кейсы в Яндекс Трекере.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Фев 2026</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Базы данных и баг-репорты</h3>
+                        <p>SQL: основные операторы и виды JOIN-ов, СУБД, транзакции, CRUD, SQL инъекции. Баг-репорт: локализация бага. Отчёт по тестированию.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Фев 2026</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Дополнительные инструменты и методологии</h3>
+                        <p>Инструменты для работы с логами: Sentry, Kibana, Grafana. Работа в MIRO. Agile, Scrum и Kanban. Роли в команде. Элементы на сайте: HTML и CSS.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Мои навыки</h2>
+            <p class="section-subtitle">Технические и профессиональные компетенции</p>
+            
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-vial"></i> Тестирование</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Функциональное тестирование</span>
+                            <span class="skill-level">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Тестовая документация</span>
+                            <span class="skill-level">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">API тестирование</span>
+                            <span class="skill-level">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Инструменты</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Postman</span>
+                            <span class="skill-level">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">DevTools</span>
+                            <span class="skill-level">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">SQL (основные операторы, JOIN, CRUD)</span>
+                            <span class="skill-level">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Charles Proxy</span>
+                            <span class="skill-level">70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-users"></i> Soft Skills</h3>
+                    <div class="soft-skills">
+                        <span class="soft-skill-tag">Внимательность</span>
+                        <span class="soft-skill-tag">Аналитическое мышление</span>
+                        <span class="soft-skill-tag">Коммуникабельность</span>
+                        <span class="soft-skill-tag">Тайм-менеджмент</span>
+                        <span class="soft-skill-tag">Умение работать в команде</span>
+                        <span class="soft-skill-tag">Критическое мышление</span>
+                        <span class="soft-skill-tag">Обучаемость</span>
+                        <span class="soft-skill-tag">Ответственность</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Qualities -->
+    <section id="qualities" style="background: rgba(16, 185, 129, 0.03);">
+        <div class="container">
+            <h2 class="section-title">Личные качества</h2>
+            <p class="section-subtitle">Что помогает мне в работе и обучении</p>
+            
+            <div class="qualities-grid">
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Упорство</h3>
+                    <p>Не сдаюсь при встрече с трудностями. Если задача сложная — разбираюсь до конца, ищу решения, пробую разные подходы.</p>
+                </div>
+                
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Внимательность</h3>
+                    <p>Замечаю детали, которые другие могут пропустить. Для тестировщика это ключевое качество — видеть нюансы.</p>
+                </div>
+                
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-chair"></i>
+                    </div>
+                    <h3>Усидчивость</h3>
+                    <p>Могу долго и кропотливо работать над задачей. Тестирование требует терпения, и у меня его достаточно.</p>
+                </div>
+                
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Легкая обучаемость</h3>
+                    <p>Быстро осваиваю новые технологии и инструменты. Люблю учиться и постоянно развиваюсь.</p>
+                </div>
+                
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <h3>Ответственность</h3>
+                    <p>Подхожу к задачам серьезно. Если берусь за дело — довожу до конца, проверяю качество своей работы.</p>
+                </div>
+                
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Аналитический склад ума</h3>
+                    <p>Умею разбивать сложные задачи на части, выявлять закономерности, строить логические цепочки.</p>
+                </div>
+                
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Коммуникабельность</h3>
+                    <p>Легко нахожу общий язык с людьми, умею четко формулировать мысли, задавать правильные вопросы.</p>
+                </div>
+                
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Энтузиазм</h3>
+                    <p>Искренне увлечена IT и тестированием. Работа для меня — не просто обязанность, а интересное дело.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Свяжитесь со мной</h2>
+            <p class="section-subtitle">Готова к новым вызовам и интересным проектам</p>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <a href="mailto:adzessi.angelika@gmail.com" class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <p>adzessi.angelika@gmail.com</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://t.me/Lika_QAm" target="_blank" class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Telegram</h3>
+                            <p>@Lika_QAm</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://wa.me/89913003818" target="_blank" class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>WhatsApp</h3>
+                            <p>+7 (991) 300-38-18</p>
+                        </div>
+                    </a>
+                    
+                    <div class="contact-item" onclick="copyEmail()" style="cursor: pointer;">
+                        <div class="contact-icon">
+                            <i class="fas fa-copy"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Быстрое копирование</h3>
+                            <p>Нажмите, чтобы скопировать email</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-message">
+                    <h3 style="margin-bottom: 20px; color: var(--primary);">Почему я могу быть полезна вашей команде?</h3>
+                    <ul style="padding-left: 20px; font-size: 1.1rem;">
+                        <li style="margin-bottom: 15px;">✅ Быстро обучаюсь и адаптируюсь</li>
+                        <li style="margin-bottom: 15px;">✅ Внимательна к деталям и настойчива</li>
+                        <li style="margin-bottom: 15px;">✅ Имею прочные знания и горячее желание развиваться</li>
+                        <li style="margin-bottom: 15px;">✅ Умею работать в команде и брать ответственность</li>
+                        <li style="margin-bottom: 15px;">✅ Готова к сложным задачам и рутинной работе</li>
+                    </ul>
+                    <p style="margin-top: 30px; font-style: italic; color: var(--gray);">
+                        Ищу позицию Junior QA Engineer или стажировку в дружной команде, где смогу применять и развивать свои навыки.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="logo" style="color: white;">
+                    <i class="fas fa-bug"></i>
+                    Лика Адзесси
+                </a>
+                <p style="max-width: 600px; opacity: 0.9;">
+                    Начинающий QA Engineer с горящими глазами и желанием создавать качественные продукты. Открыта к предложениям о работе и сотрудничеству.
+                </p>
+                <div class="social-links">
+                    <a href="mailto:adzessi.angelika@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://t.me/Lika_QAm" target="_blank" class="social-link">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://wa.me/89913003818" target="_blank" class="social-link">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2026 Лика Адзесси. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Check saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.className = 'fas fa-sun';
+        }
+        
+        // Copy Email
+        function copyEmail() {
+            navigator.clipboard.writeText('adzessi.angelika@gmail.com').then(() => {
+                alert('Email скопирован в буфер обмена!');
+            });
+        }
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = 'var(--shadow)';
+            }
+        });
+        
+        // Animate skill bars on scroll
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s ease-in-out';
+                    bar.style.width = width;
+                }, 300);
+            });
+        }
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.3
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.id === 'skills') {
+                        animateSkillBars();
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        observer.observe(document.getElementById('skills'));
+    </script>
+</body>
+</html>
